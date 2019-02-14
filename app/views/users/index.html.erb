@@ -1,1 +1,9 @@
+<% if logged_in? %>
+
 <%= render 'users',users:@users %>
+
+<% else %>
+
+<h1>ログインしてください</h1>
+
+<% end %>
