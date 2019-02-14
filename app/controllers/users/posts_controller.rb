@@ -1,6 +1,6 @@
 module Users
   class PostsController < ApplicationController
-    before_action :correct_user?
+    before_action :correct_user,only:[:update,:destroy]
 
     def index
       @user = current_user
@@ -60,9 +60,11 @@ module Users
       params.require(:post).permit(:title, :content)
     end
 
-    def correct_user?
-      @user = User.first
-      return true
+    def correct_user
+      @post = current_user.posts.find_by(id: params[:id])
+      unless @post
+      redirect_to root_url
+    end
     end
   end
 end
