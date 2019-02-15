@@ -13,4 +13,7 @@
     <%= render @comments %>
     <%= will_paginate @comments %>
   </div>
+
+    <%= render 'relationships/follow_button', user: @user %>
+
 </div>

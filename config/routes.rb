@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root to: 'static_pages#home'
   get 'home', to: "static_pages#home"
   get 'about', to: "static_pages#about"
@@ -11,5 +12,13 @@ Rails.application.routes.draw do
   resources :users, shallow: true do
     resources :posts, module: :users
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-end
+  resources :users, only: [:index, :show, :new, :create] do
+    member do
+      get :followings
+      get :followers
+    end
+  end
+  resources :relationships,only:[:create,:destroy]
+  resources :posts,only:[:create,:destroy]
+
+  end
